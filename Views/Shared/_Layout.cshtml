@@ -1,0 +1,56 @@
+@{
+    var siteName = "JM Portfolio";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0e13" />
+    <meta name="description" content="Jericho Magsino — full-stack developer building scalable web applications with ASP.NET Core, C# and SQL." />
+    <title>@ViewData["Title"] · JM Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,300..800&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" id="siteHeader">
+        <div class="shell nav">
+            <a class="brand" asp-area="" asp-controller="Home" asp-action="Index" aria-label="JM Portfolio — home">
+                <span class="brand-mark">JM</span>
+                <span class="brand-name">@siteName</span>
+            </a>
+
+            <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav class="nav-links" id="navLinks" aria-label="Primary">
+                <a href="#home" class="is-active">Home</a>
+                <a href="#projects">Projects</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <div class="shell footer-inner">
+            <p>&copy; @DateTime.Now.Year @siteName — Jericho Magsino</p>
+            <p class="footer-note">Built with ASP.NET Core MVC</p>
+        </div>
+    </footer>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

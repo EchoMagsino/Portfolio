@@ -1,0 +1,210 @@
+@model PortfolioViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="hero" id="home">
+    <div class="shell">
+        <div class="hero-card">
+            <div class="hero-copy reveal">
+                <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span>@Model.Name</p>
+
+                <h1 class="hero-title">
+                    Your Future
+                    <span class="hero-title-em">Full-Stack</span><br />
+                    <span class="hero-title-em">Developer</span>
+                </h1>
+
+                <p class="hero-role">@Model.Role</p>
+                <p class="hero-desc">@Model.Tagline</p>
+
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#projects">
+                        View My Work
+                        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                    </a>
+                    <a class="btn btn-ghost" href="#contact">Get in touch</a>
+                </div>
+
+                <ul class="hero-meta" aria-label="Core technologies">
+                    <li>ASP.NET Core</li>
+                    <li>C#</li>
+                    <li>SQL</li>
+                </ul>
+            </div>
+
+            <div class="hero-art reveal" data-delay="120" aria-hidden="true">
+                <div class="editor-glow"></div>
+
+                <div class="editor">
+                    <div class="editor-bar">
+                        <span class="editor-dots"><i></i><i></i><i></i></span>
+                        <span class="editor-file">ProjectsController.cs</span>
+                        <span class="editor-lang">C#</span>
+                    </div>
+                    <pre class="editor-code"><code>
+<div class="cl"><span class="tk-attr">[ApiController]</span></div>
+<div class="cl"><span class="tk-attr">[Route(<span class="tk-str">"api/[controller]"</span>)]</span></div>
+<div class="cl"><span class="tk-kw">public class</span> <span class="tk-type">ProjectsController</span> : <span class="tk-type">ControllerBase</span></div>
+<div class="cl"><span class="tk-punc">{</span></div>
+<div class="cl">    <span class="tk-kw">private readonly</span> <span class="tk-type">AppDbContext</span> _db;</div>
+<div class="cl"></div>
+<div class="cl">    <span class="tk-kw">public</span> <span class="tk-type">ProjectsController</span>(<span class="tk-type">AppDbContext</span> db) =&gt; _db = db;</div>
+<div class="cl"></div>
+<div class="cl">    <span class="tk-attr">[HttpGet]</span></div>
+<div class="cl">    <span class="tk-kw">public async</span> <span class="tk-type">Task</span>&lt;<span class="tk-type">IActionResult</span>&gt; <span class="tk-fn">GetAll</span>()</div>
+<div class="cl">    <span class="tk-punc">{</span></div>
+<div class="cl">        <span class="tk-kw">var</span> projects = <span class="tk-kw">await</span> _db.Projects</div>
+<div class="cl">            .<span class="tk-fn">OrderByDescending</span>(p =&gt; p.Year)</div>
+<div class="cl">            .<span class="tk-fn">ToListAsync</span>();</div>
+<div class="cl"></div>
+<div class="cl">        <span class="tk-kw">return</span> <span class="tk-fn">Ok</span>(projects);</div>
+<div class="cl">    <span class="tk-punc">}</span></div>
+<div class="cl"><span class="tk-punc">}</span></div>
+</code></pre>
+                </div>
+
+                <div class="editor-tag">
+                    <span class="editor-tag-dot"></span>
+                    <span><strong>200 OK</strong> · GET /api/projects</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="projects">
+    <div class="shell">
+        <header class="section-head section-head--center reveal">
+            <p class="eyebrow">Selected work</p>
+            <h2 class="section-title">Projects</h2>
+            <p class="section-lead">A few builds that show how I think about structure, data and the people using the thing.</p>
+        </header>
+
+        <div class="project-grid">
+            @foreach (var project in Model.Projects)
+            {
+                <article class="project-card reveal">
+                    <div class="project-top">
+                        <span class="project-number">@project.Number</span>
+                        <span class="project-year">@project.Year</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">@project.Title</h3>
+                        <p class="project-stack">@project.Stack</p>
+                        <p class="project-desc">@project.Description</p>
+                    </div>
+                    <div class="project-footer">
+                        <ul class="tags" aria-label="Technologies">
+                            @foreach (var tag in project.Tags)
+                            {
+                                <li>@tag</li>
+                            }
+                        </ul>
+                        <a class="card-link" href="#contact">
+                            Ask about this build
+                            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                        </a>
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section section--alt" id="about">
+    <div class="shell about-grid">
+        <div class="about-copy reveal">
+            <header class="section-head">
+                <p class="eyebrow">About</p>
+                <h2 class="section-title">Learning in public,<br />shipping in practice.</h2>
+            </header>
+            <p>
+                I’m Jericho — a third-year Computer Science student who likes turning messy requirements into
+                clean, dependable software. Most of my time goes into the ASP.NET Core side of the stack:
+                designing APIs, shaping databases, and making the interface feel effortless.
+            </p>
+            <p>
+                Right now I’m building full-stack projects end to end, from SQL Server schemas to Razor views,
+                and looking for an internship where I can learn from a team that ships.
+            </p>
+            <div class="about-actions">
+                <a class="btn btn-primary" href="#contact">Work with me</a>
+                <a class="btn btn-ghost" href="@Model.GitHubUrl" target="_blank" rel="noopener">GitHub</a>
+            </div>
+        </div>
+
+        <aside class="facts-card reveal" data-delay="100" aria-label="Quick facts">
+            <p class="facts-title">Quick facts</p>
+            <dl class="facts">
+                @foreach (var fact in Model.Facts)
+                {
+                    <div class="fact">
+                        <dt>@fact.Label</dt>
+                        <dd>@fact.Value</dd>
+                    </div>
+                }
+            </dl>
+            <div class="facts-foot">
+                <span class="status-dot" aria-hidden="true"></span>
+                Currently building a new demo
+            </div>
+        </aside>
+    </div>
+</section>
+
+<section class="section" id="skills">
+    <div class="shell">
+        <header class="section-head reveal">
+            <p class="eyebrow">Toolbox</p>
+            <h2 class="section-title">Skills</h2>
+            <p class="section-lead">The tools I reach for by default — and keep getting better at.</p>
+        </header>
+
+        <div class="skills-grid">
+            @foreach (var group in Model.SkillGroups)
+            {
+                <article class="skill-card reveal">
+                    <h3 class="skill-title">@group.Title</h3>
+                    <p class="skill-caption">@group.Caption</p>
+                    <ul class="skill-list">
+                        @foreach (var skill in group.Skills)
+                        {
+                            <li class="skill">
+                                <div class="skill-label">
+                                    <span>@skill.Name</span>
+                                    <span class="skill-level">@skill.Level%</span>
+                                </div>
+                                <div class="bar" role="img" aria-label="@skill.Name @skill.Level percent">
+                                    <i style="--level: @(skill.Level)%;"></i>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section section--contact" id="contact">
+    <div class="shell">
+        <div class="contact-card reveal">
+            <p class="eyebrow">Contact</p>
+            <h2 class="section-title">Let’s build something.</h2>
+            <p class="section-lead">
+                Open to internships, freelance builds and student collaborations.
+                The fastest way to reach me is email.
+            </p>
+            <div class="contact-actions">
+                <a class="btn btn-primary" href="mailto:@Model.Email">
+                    Email me
+                    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </a>
+                <a class="btn btn-ghost" href="@Model.GitHubUrl" target="_blank" rel="noopener">GitHub</a>
+                <a class="btn btn-ghost" href="@Model.LinkedInUrl" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+            <p class="contact-email">@Model.Email</p>
+        </div>
+    </div>
+</section>
